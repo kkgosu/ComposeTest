@@ -67,6 +67,7 @@ dependencies {
     implementation(Libs.AndroidX.Compose.uiUtil)
     implementation(Libs.AndroidX.Compose.material)
     implementation(Libs.AndroidX.Compose.animation)
+    implementation(Libs.AndroidX.Compose.iconsCore)
     implementation(Libs.AndroidX.Compose.iconsExtended)
     implementation(Libs.AndroidX.Compose.tooling)
 
