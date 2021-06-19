@@ -1,10 +1,10 @@
-package com.kvlg.composesberbong.ui
+package com.kvlg.recipe.ui
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.insets.ProvideWindowInsets
-import com.kvlg.composesberbong.ui.components.SberBongScaffold
-import com.kvlg.composesberbong.ui.theme.SberBongTheme
+import com.kvlg.recipe.ui.components.RecipeScaffold
+import com.kvlg.recipe.ui.theme.RecipeTheme
 
 /**
  * @author Konstantin Koval
@@ -12,11 +12,11 @@ import com.kvlg.composesberbong.ui.theme.SberBongTheme
  */
 
 @Composable
-fun SberBongApp() {
+fun RecipeApp() {
     ProvideWindowInsets {
-        SberBongTheme {
+        RecipeTheme {
             val navController = rememberNavController()
-            SberBongScaffold(
+            RecipeScaffold(
                 bottomBar = {
 
                 }) {

@@ -1,4 +1,4 @@
-package com.kvlg.composesberbong.ui.theme
+package com.kvlg.recipe.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

@@ -1,4 +1,4 @@
-package com.kvlg.composesberbong
+package com.kvlg.recipe
 
 import org.junit.Test
 

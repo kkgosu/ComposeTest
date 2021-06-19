@@ -7,7 +7,7 @@ android {
     compileSdk = 30
 
     defaultConfig {
-        applicationId = "com.kvlg.composesberbong"
+        applicationId = "com.kvlg.composerecipe"
         minSdk = 21
         targetSdk = 30
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.kvlg.composesberbong.ui.components
+package com.kvlg.recipe.ui.components
 
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
-import com.kvlg.composesberbong.ui.theme.SberBongTheme
+import com.kvlg.recipe.ui.theme.RecipeTheme
 
 /**
  * @author Konstantin Koval
@@ -24,7 +24,7 @@ import com.kvlg.composesberbong.ui.theme.SberBongTheme
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SberBongScaffold(
+fun RecipeScaffold(
     modifier: Modifier = Modifier,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
     topBar: @Composable (() -> Unit) = {},
@@ -36,11 +36,11 @@ fun SberBongScaffold(
     drawerContent: @Composable (ColumnScope.() -> Unit)? = null,
     drawerShape: Shape = MaterialTheme.shapes.large,
     drawerElevation: Dp = DrawerDefaults.Elevation,
-    drawerBackgroundColor: Color = SberBongTheme.colors.uiBackground,
-    drawerContentColor: Color = SberBongTheme.colors.textSecondary,
-    drawerScrimColor: Color = SberBongTheme.colors.uiBorder,
-    backgroundColor: Color = SberBongTheme.colors.uiBackground,
-    contentColor: Color = SberBongTheme.colors.textSecondary,
+    drawerBackgroundColor: Color = RecipeTheme.colors.uiBackground,
+    drawerContentColor: Color = RecipeTheme.colors.textSecondary,
+    drawerScrimColor: Color = RecipeTheme.colors.uiBorder,
+    backgroundColor: Color = RecipeTheme.colors.uiBackground,
+    contentColor: Color = RecipeTheme.colors.textSecondary,
     content: @Composable (PaddingValues) -> Unit
 ) {
     Scaffold(

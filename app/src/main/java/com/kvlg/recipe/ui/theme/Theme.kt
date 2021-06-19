@@ -1,4 +1,4 @@
-package com.kvlg.composesberbong.ui.theme
+package com.kvlg.recipe.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
@@ -16,7 +16,7 @@ import androidx.compose.ui.graphics.Color
  * @since 19.06.2021
  */
 
-private val LightColorPalette = SberBongColors(
+private val LightColorPalette = RecipeColors(
     brand = Shadow5,
     brandSecondary = Ocean3,
     uiBackground = Neutral0,
@@ -41,7 +41,7 @@ private val LightColorPalette = SberBongColors(
     isDark = false
 )
 
-private val DarkColorPalette = SberBongColors(
+private val DarkColorPalette = RecipeColors(
     brand = Shadow1,
     brandSecondary = Ocean2,
     uiBackground = Neutral8,
@@ -69,21 +69,21 @@ private val DarkColorPalette = SberBongColors(
 )
 
 @Composable
-fun SberBongTheme(
+fun RecipeTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
 
 }
 
-object SberBongTheme {
-    val colors: SberBongColors
+object RecipeTheme {
+    val colors: RecipeColors
         @Composable
-        get() = LocalSberBongColors.current
+        get() = LocalRecipeColors.current
 }
 
 @Stable
-class SberBongColors(
+class RecipeColors(
     gradient6_1: List<Color>,
     gradient6_2: List<Color>,
     gradient3_1: List<Color>,
@@ -170,7 +170,7 @@ class SberBongColors(
     var isDark by mutableStateOf(isDark)
         private set
 
-    fun update(other: SberBongColors) {
+    fun update(other: RecipeColors) {
         gradient6_1 = other.gradient6_1
         gradient6_2 = other.gradient6_2
         gradient3_1 = other.gradient3_1
@@ -203,15 +203,15 @@ class SberBongColors(
 }
 
 @Composable
-fun ProvideSberBongColors(
-    colors: SberBongColors,
+fun ProvideRecipeColors(
+    colors: RecipeColors,
     content: @Composable () -> Unit
 ) {
     val colorPalette = remember { colors }
     colorPalette.update(colors)
-    CompositionLocalProvider(LocalSberBongColors provides colorPalette, content = content)
+    CompositionLocalProvider(LocalRecipeColors provides colorPalette, content = content)
 }
 
-private val LocalSberBongColors = staticCompositionLocalOf<SberBongColors> {
+private val LocalRecipeColors = staticCompositionLocalOf<RecipeColors> {
     error("No JetsnackColorPalette provided")
 }
