@@ -1,5 +1,3 @@
-package com.kvlg.sberbong.buildsrc
-
 /**
  * @author Konstantin Koval
  * @since 19.06.2021
