@@ -50,6 +50,10 @@ object Libs {
             const val activityCompose = "androidx.activity:activity-compose:1.3.0-beta02"
         }
 
+        object Fragment {
+            const val fragment = "androidx.fragment:fragment-ktx:1.3.4"
+        }
+
         object Lifecycle {
             const val viewModelCompose =
                 "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
@@ -68,10 +72,12 @@ object Libs {
             private const val version = "1.3.0"
             const val runner = "androidx.test:runner:$version"
             const val rules = "androidx.test:rules:$version"
+
             object Ext {
                 private const val version = "1.1.2-rc01"
                 const val junit = "androidx.test.ext:junit-ktx:$version"
             }
+
             const val espressoCore = "androidx.test.espresso:espresso-core:3.2.0"
         }
     }

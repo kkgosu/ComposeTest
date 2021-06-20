@@ -56,6 +56,7 @@ dependencies {
 
     implementation(Libs.AndroidX.coreKtx)
     implementation(Libs.AndroidX.Activity.activityCompose)
+    implementation(Libs.AndroidX.Fragment.fragment)
     implementation(Libs.AndroidX.Lifecycle.viewModelCompose)
     implementation(Libs.AndroidX.Navigation.navigationCompose)
     implementation(Libs.AndroidX.ConstraintLayout.constraintLayoutCompose)

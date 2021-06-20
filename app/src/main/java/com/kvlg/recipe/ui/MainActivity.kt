@@ -24,9 +24,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.ExperimentalUnitApi
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.kvlg.recipe.R
 
 class MainActivity : ComponentActivity() {
@@ -36,7 +35,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            Column(
+
+            RecipeAppNavGraph()
+/*            Column(
                 modifier = Modifier
                     .background(Color(0xFFF2F2F2))
                     .fillMaxSize()
@@ -55,22 +56,22 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
-                        Text(text = "Happy meal", style = TextStyle(fontSize = TextUnit(24f, TextUnitType.Sp)))
+                        Text(text = "Happy meal", style = TextStyle(fontSize = 24.sp))
                         Text(
                             text = "$5.99",
-                            style = TextStyle(fontSize = TextUnit(20f, TextUnitType.Sp)),
+                            style = TextStyle(fontSize = 20.sp),
                             color = Color(0xFF85bb65),
                             modifier = Modifier.align(Alignment.CenterVertically)
                         )
                     }
                     Spacer(modifier = Modifier.padding(top = 10.dp))
-                    Text(text = "800 calories", style = TextStyle(fontSize = TextUnit(20f, TextUnitType.Sp)))
+                    Text(text = "800 calories", style = TextStyle(fontSize = 20.sp))
                     Spacer(modifier = Modifier.padding(top = 10.dp))
                     Button(onClick = {}, modifier = Modifier.align(Alignment.CenterHorizontally)) {
                         Text(text = "Order Now!")
                     }
                 }
-            }
+            }*/
         }
     }
 }
