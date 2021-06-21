@@ -1,7 +1,9 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
+    kotlin("android")
+    kotlin("kapt")
     id("kotlin-parcelize")
+    id("dagger.hilt.android.plugin")
 }
 
 android {
@@ -56,6 +58,9 @@ dependencies {
 
     implementation(Libs.Network.retrofit)
     implementation(Libs.Network.gson)
+
+    implementation(Libs.Hilt.android)
+    kapt(Libs.Hilt.compiler)
 
     implementation(Libs.AndroidX.coreKtx)
     implementation(Libs.AndroidX.Activity.activityCompose)

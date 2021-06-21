@@ -2,6 +2,11 @@ package com.kvlg.recipe.model.data
 
 import com.google.gson.annotations.SerializedName
 
+/**
+ * I won't use any other model layer like domain or presentation bcuz this is not the goal of the project.
+ * I've done that 100 times so I'm tired of that LOL
+ */
+
 data class RecipeResponse(
     @SerializedName("count")
     val count: Int? = null,

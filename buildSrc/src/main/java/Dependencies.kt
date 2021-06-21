@@ -3,7 +3,7 @@
  * @since 19.06.2021
  */
 object Libs {
-    const val androidGradlePlugin = "com.android.tools.build:gradle:7.0.0-beta04"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:7.1.0-alpha02"
 
     object Accompanist {
         const val version = "0.12.0"
@@ -16,7 +16,6 @@ object Libs {
         private const val version = "1.5.10"
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$version"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:$version"
-        const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
     }
 
     object Network {
@@ -29,6 +28,15 @@ object Libs {
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
         const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$version"
         const val test = "org.jetbrains.kotlinx:kotlinx-coroutines-test:$version"
+    }
+
+    object Hilt {
+        private const val version = "2.36"
+
+        const val gradlePlugin = "com.google.dagger:hilt-android-gradle-plugin:$version"
+        const val android = "com.google.dagger:hilt-android:$version"
+        const val compiler = "com.google.dagger:hilt-compiler:$version"
+        const val testing = "com.google.dagger:hilt-android-testing:$version"
     }
 
     object AndroidX {
