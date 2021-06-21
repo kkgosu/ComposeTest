@@ -52,8 +52,10 @@ dependencies {
 
     implementation(Libs.Kotlin.stdlib)
     implementation(Libs.Coroutines.android)
-
     implementation(Libs.Coroutines.core)
+
+    implementation(Libs.Network.retrofit)
+    implementation(Libs.Network.gson)
 
     implementation(Libs.AndroidX.coreKtx)
     implementation(Libs.AndroidX.Activity.activityCompose)

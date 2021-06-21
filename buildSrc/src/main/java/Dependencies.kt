@@ -19,6 +19,11 @@ object Libs {
         const val extensions = "org.jetbrains.kotlin:kotlin-android-extensions:$version"
     }
 
+    object Network {
+        const val retrofit = "com.squareup.retrofit2:retrofit:2.9.0"
+        const val gson = "com.squareup.retrofit2:converter-gson:2.9.0"
+    }
+
     object Coroutines {
         private const val version = "1.4.1"
         const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$version"
