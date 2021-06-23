@@ -38,4 +38,8 @@ object MainModule {
     fun provideRecipeRepository(service: RecipeService): RecipeRepository {
         return RecipeRepositoryImpl(service)
     }
+
+    @Provides
+    @Singleton
+    fun provideAuthToken(): String = "Token 9c8b06d329136da358c2d00e76946b0111ce2c48"
 }

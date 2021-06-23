@@ -26,6 +26,6 @@ interface RecipeService {
     ): RecipeResponseModel
 
     companion object {
-        const val BASE_URL = "https://food2fork.ca/api/recipe"
+        const val BASE_URL = "https://food2fork.ca/api/recipe/"
     }
 }

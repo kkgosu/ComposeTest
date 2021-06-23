@@ -1,6 +1,7 @@
 package com.kvlg.recipe.ui
 
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -27,13 +28,14 @@ object Destinations {
 
 @Composable
 fun RecipeAppNavGraph(
+    recipeViewModel: RecipeViewModel = viewModel(),
     navController: NavHostController = rememberNavController(),
     startDestination: String = HOME
 ) {
     NavHost(navController = navController, startDestination = startDestination) {
         navigation(route = HOME, startDestination = HOME_ROUTE) {
             composable(HOME_ROUTE) {
-                RecipeListFragment(onRecipeClick = { id ->
+                RecipeListFragment(viewModel = recipeViewModel, onRecipeClick = { id ->
                     navController.navigate("$RECIPE_DETAILS/$id")
                 })
             }
