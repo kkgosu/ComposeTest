@@ -14,8 +14,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.coil.rememberCoilPainter
 import com.kvlg.recipe.R
 import com.kvlg.recipe.model.data.RecipeResponseModel
 
@@ -45,11 +46,12 @@ fun RecipeCard(
         Column {
             recipe.featuredImage?.let {
                 Image(
-                    painter = painterResource(id = R.drawable.empty_plate),
+                    painter = rememberCoilPainter(request = it, fadeIn = true, previewPlaceholder = R.drawable.empty_plate),
                     contentDescription = null,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .requiredHeight(225.dp)
+                        .requiredHeight(225.dp),
+                    contentScale = ContentScale.Crop
                 )
             }
             recipe.title?.let {

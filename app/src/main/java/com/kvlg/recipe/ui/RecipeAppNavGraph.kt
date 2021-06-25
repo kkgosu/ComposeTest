@@ -9,6 +9,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navigation
+import coil.Coil
 import com.kvlg.recipe.ui.Destinations.HOME
 import com.kvlg.recipe.ui.Destinations.HOME_ROUTE
 import com.kvlg.recipe.ui.Destinations.RECIPE_DETAILS
