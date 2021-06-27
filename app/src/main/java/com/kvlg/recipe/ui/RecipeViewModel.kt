@@ -28,7 +28,7 @@ class RecipeViewModel @Inject constructor(
 
     fun newSearch() {
         viewModelScope.launch {
-            val result = repository.search(token, 1, "chicken")
+            val result = repository.search(token, 1, query.value)
             recipes.value = result
         }
     }
