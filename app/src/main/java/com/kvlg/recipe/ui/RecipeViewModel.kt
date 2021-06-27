@@ -20,6 +20,7 @@ class RecipeViewModel @Inject constructor(
     private val token: String
 ) : ViewModel() {
     val recipes: MutableState<List<RecipeResponseModel>> = mutableStateOf(ArrayList())
+    val query = mutableStateOf("beef")
 
     init {
         newSearch()
@@ -30,5 +31,9 @@ class RecipeViewModel @Inject constructor(
             val result = repository.search(token, 1, "chicken")
             recipes.value = result
         }
+    }
+
+    fun onQueryChange(query: String) {
+        this.query.value = query
     }
 }
