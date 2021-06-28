@@ -20,6 +20,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -35,7 +36,7 @@ import com.kvlg.recipe.ui.components.RecipeCard
 @Composable
 fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit) {
     Column {
-        Surface(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colors.primary, elevation = 8.dp) {
+        Surface(modifier = Modifier.fillMaxWidth(), color = Color.White, elevation = 8.dp) {
             Column {
                 Row {
                     TextField(
@@ -43,7 +44,7 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
                             .fillMaxWidth(0.9f)
                             .padding(8.dp),
                         value = viewModel.query.value,
-                        onValueChange = viewModel::onQueryChange,
+                        onValueChange = viewModel::onQueryChanged,
                         maxLines = 1,
                         label = {
                             Text(text = "Search")
@@ -61,14 +62,17 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
                 }
                 Row(
                     modifier = Modifier
+                        .padding(start = 8.dp, bottom = 8.dp)
                         .fillMaxWidth()
                         .horizontalScroll(rememberScrollState())
                 ) {
                     FoodCategory.values().forEach {
                         FoodCategoryChip(
                             category = it,
+                            isSelected = viewModel.selectedCategory.value == it,
+                            onSelectCategoryChanged = viewModel::onSelectedCategoryChanged,
                             onClick = {
-                                viewModel.onQueryChange(it)
+                                viewModel.onQueryChanged(it.value)
                                 viewModel.newSearch()
                             }
                         )

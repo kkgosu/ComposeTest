@@ -20,6 +20,7 @@ class RecipeViewModel @Inject constructor(
     private val token: String
 ) : ViewModel() {
     val recipes: MutableState<List<RecipeResponseModel>> = mutableStateOf(ArrayList())
+    val selectedCategory: MutableState<FoodCategory?> = mutableStateOf(null)
     val query = mutableStateOf("beef")
 
     init {
@@ -33,7 +34,13 @@ class RecipeViewModel @Inject constructor(
         }
     }
 
-    fun onQueryChange(query: String) {
+    fun onQueryChanged(query: String) {
         this.query.value = query
+    }
+
+    fun onSelectedCategoryChanged(category: String) {
+        val newCategory = getFoodCategory(category)
+        selectedCategory.value = newCategory
+        onQueryChanged(category)
     }
 }

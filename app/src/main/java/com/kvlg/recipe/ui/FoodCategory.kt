@@ -16,3 +16,5 @@ enum class FoodCategory(val value: String) {
     PIZZA("Pizza"),
     DONUT("Donut")
 }
+
+fun getFoodCategory(value: String) = FoodCategory.values().associateBy(FoodCategory::value)[value]
