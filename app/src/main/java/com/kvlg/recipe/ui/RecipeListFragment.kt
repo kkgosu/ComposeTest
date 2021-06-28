@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import com.kvlg.recipe.ui.components.FoodCategoryChip
 import com.kvlg.recipe.ui.components.RecipeCard
 
 /**
@@ -64,11 +65,12 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
                         .horizontalScroll(rememberScrollState())
                 ) {
                     FoodCategory.values().forEach {
-                        Text(
-                            text = it.value,
-                            style = MaterialTheme.typography.body2,
-                            color = MaterialTheme.colors.secondary,
-                            modifier = Modifier.padding(8.dp)
+                        FoodCategoryChip(
+                            category = it,
+                            onClick = {
+                                viewModel.onQueryChange(it)
+                                viewModel.newSearch()
+                            }
                         )
                     }
                 }
