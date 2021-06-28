@@ -1,11 +1,13 @@
 package com.kvlg.recipe.ui
 
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -33,27 +35,43 @@ import com.kvlg.recipe.ui.components.RecipeCard
 fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit) {
     Column {
         Surface(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colors.primary, elevation = 8.dp) {
-            Row {
-                TextField(
+            Column {
+                Row {
+                    TextField(
+                        modifier = Modifier
+                            .fillMaxWidth(0.9f)
+                            .padding(8.dp),
+                        value = viewModel.query.value,
+                        onValueChange = viewModel::onQueryChange,
+                        maxLines = 1,
+                        label = {
+                            Text(text = "Search")
+                        },
+                        keyboardActions = KeyboardActions(onSearch = { viewModel.newSearch() }),
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Search),
+                        leadingIcon = {
+                            Icon(imageVector = Icons.Filled.Search, contentDescription = null)
+                        },
+                        colors = TextFieldDefaults.textFieldColors(
+                            backgroundColor = MaterialTheme.colors.surface
+                        ),
+                        textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
+                    )
+                }
+                Row(
                     modifier = Modifier
-                        .fillMaxWidth(0.9f)
-                        .padding(8.dp),
-                    value = viewModel.query.value,
-                    onValueChange = viewModel::onQueryChange,
-                    maxLines = 1,
-                    label = {
-                        Text(text = "Search")
-                    },
-                    keyboardActions = KeyboardActions(onSearch = { viewModel.newSearch() }),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Search),
-                    leadingIcon = {
-                        Icon(imageVector = Icons.Filled.Search, contentDescription = null)
-                    },
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = MaterialTheme.colors.surface
-                    ),
-                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
-                )
+                        .fillMaxWidth()
+                        .horizontalScroll(rememberScrollState())
+                ) {
+                    FoodCategory.values().forEach {
+                        Text(
+                            text = it.value,
+                            style = MaterialTheme.typography.body2,
+                            color = MaterialTheme.colors.secondary,
+                            modifier = Modifier.padding(8.dp)
+                        )
+                    }
+                }
             }
         }
         LazyColumn {
