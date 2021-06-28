@@ -23,6 +23,8 @@ class RecipeViewModel @Inject constructor(
     val selectedCategory: MutableState<FoodCategory?> = mutableStateOf(null)
     val query = mutableStateOf("beef")
 
+    var categoryScrollPosition = 0
+
     init {
         newSearch()
     }

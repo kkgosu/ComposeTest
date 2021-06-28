@@ -19,6 +19,7 @@ import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -27,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.kvlg.recipe.ui.components.FoodCategoryChip
 import com.kvlg.recipe.ui.components.RecipeCard
+import kotlinx.coroutines.launch
 
 /**
  * @author Konstantin Koval
@@ -60,17 +62,22 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
                         textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
                     )
                 }
+                val scrollState = rememberScrollState()
                 Row(
                     modifier = Modifier
                         .padding(start = 8.dp, bottom = 8.dp)
                         .fillMaxWidth()
-                        .horizontalScroll(rememberScrollState())
+                        .horizontalScroll(scrollState)
                 ) {
+                    rememberCoroutineScope().launch { scrollState.animateScrollTo(value = viewModel.categoryScrollPosition) }
                     FoodCategory.values().forEach {
                         FoodCategoryChip(
                             category = it,
                             isSelected = viewModel.selectedCategory.value == it,
-                            onSelectCategoryChanged = viewModel::onSelectedCategoryChanged,
+                            onSelectCategoryChanged = { categoryName ->
+                                viewModel.onSelectedCategoryChanged(categoryName)
+                                viewModel.categoryScrollPosition = scrollState.value
+                            },
                             onClick = {
                                 viewModel.onQueryChanged(it.value)
                                 viewModel.newSearch()
