@@ -41,7 +41,6 @@ fun PulseDemo() {
             repeatMode = RepeatMode.Restart
         )
     )
-
     Row(
         modifier = Modifier
             .fillMaxWidth()
