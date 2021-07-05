@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.kvlg.recipe.ui.components.AnimatedHeartButton
 import com.kvlg.recipe.ui.components.CircularIndeterminateProgressBar
@@ -20,6 +21,7 @@ import com.kvlg.recipe.ui.components.HeartAnimationDefinition.HeartButtonState.A
 import com.kvlg.recipe.ui.components.HeartAnimationDefinition.HeartButtonState.IDLE
 import com.kvlg.recipe.ui.components.RecipeCard
 import com.kvlg.recipe.ui.components.SearchAppBar
+import com.kvlg.recipe.ui.components.ShimmerRecipeCardItem
 
 /**
  * @author Konstantin Koval
@@ -30,12 +32,21 @@ import com.kvlg.recipe.ui.components.SearchAppBar
 fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit) {
     Column {
         SearchAppBar(viewModel = viewModel)
-        Row(modifier = Modifier
-            .fillMaxWidth()
-            .height(200.dp), horizontalArrangement = Arrangement.Center) {
+        ShimmerRecipeCardItem(
+            colors = listOf(
+                Color.LightGray.copy(alpha = 0.9f),
+                Color.LightGray.copy(alpha = 0.2f),
+                Color.LightGray.copy(alpha = 0.9f),
+            ), cardHeight = 250.dp
+        )
+/*        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(200.dp), horizontalArrangement = Arrangement.Center
+        ) {
             val state = remember { mutableStateOf(IDLE) }
             AnimatedHeartButton(modifier = Modifier, buttonState = state, onToggle = { state.value = if (state.value == IDLE) ACTIVE else IDLE })
-        }
+        }*/
         Box(modifier = Modifier.fillMaxSize()) {
             LazyColumn {
                 itemsIndexed(
@@ -43,6 +54,7 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
                 ) { index, item ->
                     RecipeCard(recipe = item, onClick = onRecipeClick)
                 }
+
             }
             CircularIndeterminateProgressBar(isDisplayed = viewModel.loading.value)
         }
