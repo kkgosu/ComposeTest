@@ -19,6 +19,7 @@ import com.kvlg.recipe.ui.components.AnimatedHeartButton
 import com.kvlg.recipe.ui.components.CircularIndeterminateProgressBar
 import com.kvlg.recipe.ui.components.HeartAnimationDefinition.HeartButtonState.ACTIVE
 import com.kvlg.recipe.ui.components.HeartAnimationDefinition.HeartButtonState.IDLE
+import com.kvlg.recipe.ui.components.LoadingRecipeListShimmer
 import com.kvlg.recipe.ui.components.RecipeCard
 import com.kvlg.recipe.ui.components.SearchAppBar
 import com.kvlg.recipe.ui.components.ShimmerRecipeCardItem
@@ -32,13 +33,9 @@ import com.kvlg.recipe.ui.components.ShimmerRecipeCardItem
 fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit) {
     Column {
         SearchAppBar(viewModel = viewModel)
-        ShimmerRecipeCardItem(
-            colors = listOf(
-                Color.LightGray.copy(alpha = 0.9f),
-                Color.LightGray.copy(alpha = 0.2f),
-                Color.LightGray.copy(alpha = 0.9f),
-            ), cardHeight = 250.dp
-        )
+        if (viewModel.loading.value) {
+            LoadingRecipeListShimmer(imageHeight = 260.dp)
+        }
 /*        Row(
             modifier = Modifier
                 .fillMaxWidth()

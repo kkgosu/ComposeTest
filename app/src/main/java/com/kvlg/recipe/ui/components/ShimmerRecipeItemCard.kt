@@ -1,9 +1,12 @@
 package com.kvlg.recipe.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -22,19 +25,35 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun ShimmerRecipeCardItem(
     colors: List<Color>,
+    xShimmer: Float,
+    yShimmer: Float,
+    gradientWidth: Float,
+    padding: Dp,
     cardHeight: Dp
 ) {
     val brush = Brush.linearGradient(
         colors = colors,
-        start = Offset(200f, 200f),
-        end = Offset(400f, 400f)
+        start = Offset(xShimmer - gradientWidth, yShimmer - gradientWidth),
+        end = Offset(xShimmer, yShimmer)
     )
-    Surface(shape = MaterialTheme.shapes.small) {
-        Spacer(
-            modifier = Modifier
-                .fillMaxWidth()
-                .requiredHeight(cardHeight)
-                .background(brush = brush)
-        )
+    Column(modifier = Modifier.padding(padding)) {
+        Surface(shape = MaterialTheme.shapes.small) {
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(cardHeight)
+                    .background(brush = brush)
+            )
+        }
+        Spacer(modifier = Modifier.height(12.dp))
+        Surface(shape = MaterialTheme.shapes.small) {
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(cardHeight / 10)
+                    .background(brush = brush)
+            )
+        }
     }
+
 }

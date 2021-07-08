@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kvlg.recipe.data.RecipeRepository
 import com.kvlg.recipe.model.data.RecipeResponseModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -33,6 +34,7 @@ class RecipeViewModel @Inject constructor(
     fun newSearch() {
         viewModelScope.launch {
             loading.value = true
+            delay(5000)
             resetSearchState()
             val result = repository.search(token, 1, query.value)
             recipes.value = result
