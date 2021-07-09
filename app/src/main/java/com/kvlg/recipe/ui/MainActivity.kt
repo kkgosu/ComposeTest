@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.ui.unit.ExperimentalUnitApi
+import com.kvlg.recipe.RecipeApplication
+import com.kvlg.recipe.ui.theme.AppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -14,8 +16,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-
-            RecipeAppNavGraph()
+            AppTheme(darkTheme = RecipeApplication.isDark.value) {
+                RecipeAppNavGraph()
+            }
         }
     }
 }

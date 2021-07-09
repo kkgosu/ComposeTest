@@ -9,21 +9,25 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import com.kvlg.recipe.ui.FoodCategory
 import com.kvlg.recipe.ui.RecipeViewModel
 import kotlinx.coroutines.launch
@@ -35,9 +39,10 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SearchAppBar(
-    viewModel: RecipeViewModel
+    viewModel: RecipeViewModel,
+    onToggleTheme: () -> Unit,
 ) {
-    Surface(modifier = Modifier.fillMaxWidth(), color = Color.White, elevation = 8.dp) {
+    Surface(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colors.secondary, elevation = 8.dp) {
         Column {
             Row {
                 TextField(
@@ -60,6 +65,16 @@ fun SearchAppBar(
                     ),
                     textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
                 )
+                ConstraintLayout(modifier = Modifier.align(Alignment.CenterVertically)) {
+                    val menu = createRef()
+                    IconButton(onClick = onToggleTheme, modifier = Modifier.constrainAs(menu) {
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }) {
+                        Icon(imageVector = Icons.Filled.MoreVert, contentDescription = null)
+                    }
+                }
             }
             val scrollState = rememberScrollState()
             Row(
