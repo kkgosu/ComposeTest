@@ -34,8 +34,8 @@ class RecipeViewModel @Inject constructor(
     fun newSearch() {
         viewModelScope.launch {
             loading.value = true
-            delay(5000)
             resetSearchState()
+            delay(5000)
             val result = repository.search(token, 1, query.value)
             recipes.value = result
             loading.value = false

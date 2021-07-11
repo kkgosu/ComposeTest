@@ -11,6 +11,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -22,14 +23,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.kvlg.recipe.ui.FoodCategory
 import com.kvlg.recipe.ui.RecipeViewModel
+import com.kvlg.recipe.ui.util.SnackbarController
 import kotlinx.coroutines.launch
 
 /**
@@ -40,6 +40,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun SearchAppBar(
     viewModel: RecipeViewModel,
+    scaffoldState: ScaffoldState,
+    snackbarController: SnackbarController,
     onToggleTheme: () -> Unit,
 ) {
     Surface(modifier = Modifier.fillMaxWidth(), color = MaterialTheme.colors.secondary, elevation = 8.dp) {
@@ -93,8 +95,12 @@ fun SearchAppBar(
                             viewModel.categoryScrollPosition = scrollState.value
                         },
                         onClick = {
-                            viewModel.onQueryChanged(it.value)
-                            viewModel.newSearch()
+                            if (viewModel.selectedCategory.value?.value == "Milk") {
+                                snackbarController.showSnackbar(scaffoldState, "Invalid category", "Hide")
+                            } else {
+                                viewModel.onQueryChanged(it.value)
+                                viewModel.newSearch()
+                            }
                         }
                     )
                 }
