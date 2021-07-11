@@ -64,7 +64,7 @@ fun RecipeCard(
                         modifier = Modifier
                             .fillMaxWidth(fraction = 0.85f)
                             .wrapContentWidth(Alignment.Start),
-                        style = MaterialTheme.typography.h5
+                        style = MaterialTheme.typography.h6
                     )
                     Text(
                         text = recipe.rating?.toString() ?: "0",

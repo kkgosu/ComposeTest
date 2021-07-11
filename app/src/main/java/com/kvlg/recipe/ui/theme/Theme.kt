@@ -53,6 +53,8 @@ fun AppTheme(
 ) {
     MaterialTheme(
         colors = if (darkTheme) DarkThemeColors else LightThemeColors,
+        typography = Typography,
+        shapes = Shapes
     ) {
         content()
     }

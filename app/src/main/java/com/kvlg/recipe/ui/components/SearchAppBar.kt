@@ -63,7 +63,7 @@ fun SearchAppBar(
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = MaterialTheme.colors.surface
                     ),
-                    textStyle = TextStyle(color = MaterialTheme.colors.onSurface)
+                    textStyle = MaterialTheme.typography.button
                 )
                 ConstraintLayout(modifier = Modifier.align(Alignment.CenterVertically)) {
                     val menu = createRef()
