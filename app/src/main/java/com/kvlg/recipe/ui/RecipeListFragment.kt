@@ -49,13 +49,14 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
                 .fillMaxSize()
                 .background(color = MaterialTheme.colors.background)
         ) {
-            if (viewModel.loading.value) {
+            if (viewModel.loading.value && viewModel.recipes.value.isEmpty()) {
                 LoadingRecipeListShimmer(imageHeight = 260.dp)
             }
             LazyColumn {
                 itemsIndexed(
                     items = viewModel.recipes.value
                 ) { index, item ->
+                    viewModel.onChangeScrollPosition(index)
                     RecipeCard(recipe = item, onClick = onRecipeClick)
                 }
 
