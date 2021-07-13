@@ -52,6 +52,7 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
             if (viewModel.loading.value && viewModel.recipes.value.isEmpty()) {
                 LoadingRecipeListShimmer(imageHeight = 260.dp)
             }
+
             LazyColumn {
                 itemsIndexed(
                     items = viewModel.recipes.value

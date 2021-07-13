@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.kvlg.recipe.ui.FoodCategory
 import com.kvlg.recipe.ui.RecipeViewModel
+import com.kvlg.recipe.ui.event.RecipeListEvent.NewSearchEvent
 import com.kvlg.recipe.ui.util.SnackbarController
 import kotlinx.coroutines.launch
 
@@ -57,7 +58,7 @@ fun SearchAppBar(
                     label = {
                         Text(text = "Search")
                     },
-                    keyboardActions = KeyboardActions(onSearch = { viewModel.newSearch() }),
+                    keyboardActions = KeyboardActions(onSearch = { viewModel.onEvent(NewSearchEvent) }),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Search),
                     leadingIcon = {
                         Icon(imageVector = Icons.Filled.Search, contentDescription = null)
@@ -99,7 +100,7 @@ fun SearchAppBar(
                                 snackbarController.showSnackbar(scaffoldState, "Invalid category", "Hide")
                             } else {
                                 viewModel.onQueryChanged(it.value)
-                                viewModel.newSearch()
+                                viewModel.onEvent(NewSearchEvent)
                             }
                         }
                     )

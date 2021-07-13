@@ -7,7 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvlg.recipe.data.RecipeRepository
 import com.kvlg.recipe.model.data.RecipeResponseModel
+import com.kvlg.recipe.ui.event.RecipeListEvent
+import com.kvlg.recipe.ui.event.RecipeListEvent.NewSearchEvent
+import com.kvlg.recipe.ui.event.RecipeListEvent.NextPageEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -30,18 +34,20 @@ class RecipeViewModel @Inject constructor(
     private var recipeListScrollPosition = 0
     var categoryScrollPosition = 0
 
-    init {
-        newSearch()
+    private val handler = CoroutineExceptionHandler { coroutineContext, throwable ->
+        Log.e(TAG, "onEvent: ", throwable)
     }
 
-    fun newSearch() {
-        viewModelScope.launch {
-            loading.value = true
-            resetSearchState()
-            delay(5000)
-            val result = repository.search(token, 1, query.value)
-            recipes.value = result
-            loading.value = false
+    init {
+        onEvent(NewSearchEvent)
+    }
+
+    fun onEvent(event: RecipeListEvent) {
+        viewModelScope.launch(handler) {
+            when (event) {
+                is NewSearchEvent -> newSearch()
+                is NextPageEvent -> nextPage()
+            }
         }
     }
 
@@ -58,30 +64,37 @@ class RecipeViewModel @Inject constructor(
     fun onChangeScrollPosition(position: Int) {
         recipeListScrollPosition = position
         if (position + 1 >= page * PAGE_SIZE && !loading.value) {
-            nextPage()
+            onEvent(NextPageEvent)
         }
     }
 
-    private fun nextPage() {
-        viewModelScope.launch {
-            //prevent duplicate events due to recompose happening to quickly
-            loading.value = true
-            page += 1
-            Log.d(TAG, "nextPage: triggered: $page")
+    private suspend fun newSearch() {
+        loading.value = true
+        resetSearchState()
+        delay(5000)
+        val result = repository.search(token, 1, query.value)
+        recipes.value = result
+        loading.value = false
+    }
 
-            delay(1000)
+    private suspend fun nextPage() {
+        //prevent duplicate events due to recompose happening to quickly
+        loading.value = true
+        page += 1
+        Log.d(TAG, "nextPage: triggered: $page")
 
-            if (page > 1) {
-                val result = repository.search(
-                    token = token,
-                    page = page,
-                    query = query.value
-                )
-                Log.d(TAG, "nextPage: $result")
-                appendRecipes(result)
-            }
-            loading.value = false
+        delay(1000)
+
+        if (page > 1) {
+            val result = repository.search(
+                token = token,
+                page = page,
+                query = query.value
+            )
+            Log.d(TAG, "nextPage: $result")
+            appendRecipes(result)
         }
+        loading.value = false
     }
 
     private fun resetSearchState() {
