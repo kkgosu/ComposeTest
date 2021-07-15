@@ -12,7 +12,6 @@ import com.kvlg.recipe.ui.event.RecipeListEvent
 import com.kvlg.recipe.ui.event.RecipeListEvent.NewSearchEvent
 import com.kvlg.recipe.ui.event.RecipeListEvent.NextPageEvent
 import com.kvlg.recipe.ui.event.RecipeListEvent.RestoreStateEvent
-import dagger.assisted.Assisted
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.delay
@@ -27,7 +26,7 @@ import javax.inject.Inject
 class RecipeViewModel @Inject constructor(
     private val repository: RecipeRepository,
     private val token: String,
-    @Assisted private val savedStateHandle: SavedStateHandle
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     val recipes: MutableState<List<RecipeResponseModel>> = mutableStateOf(ArrayList())
     val selectedCategory: MutableState<FoodCategory?> = mutableStateOf(null)
