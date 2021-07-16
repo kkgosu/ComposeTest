@@ -28,7 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.kvlg.recipe.ui.FoodCategory
-import com.kvlg.recipe.ui.RecipeViewModel
+import com.kvlg.recipe.ui.RecipeListViewModel
 import com.kvlg.recipe.ui.event.RecipeListEvent.NewSearchEvent
 import com.kvlg.recipe.ui.util.SnackbarController
 import kotlinx.coroutines.launch
@@ -40,7 +40,7 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun SearchAppBar(
-    viewModel: RecipeViewModel,
+    listViewModel: RecipeListViewModel,
     scaffoldState: ScaffoldState,
     snackbarController: SnackbarController,
     onToggleTheme: () -> Unit,
@@ -52,13 +52,13 @@ fun SearchAppBar(
                     modifier = Modifier
                         .fillMaxWidth(0.9f)
                         .padding(8.dp),
-                    value = viewModel.query.value,
-                    onValueChange = viewModel::onQueryChanged,
+                    value = listViewModel.query.value,
+                    onValueChange = listViewModel::onQueryChanged,
                     maxLines = 1,
                     label = {
                         Text(text = "Search")
                     },
-                    keyboardActions = KeyboardActions(onSearch = { viewModel.onEvent(NewSearchEvent) }),
+                    keyboardActions = KeyboardActions(onSearch = { listViewModel.onEvent(NewSearchEvent) }),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Search),
                     leadingIcon = {
                         Icon(imageVector = Icons.Filled.Search, contentDescription = null)
@@ -86,21 +86,21 @@ fun SearchAppBar(
                     .fillMaxWidth()
                     .horizontalScroll(scrollState)
             ) {
-                rememberCoroutineScope().launch { scrollState.animateScrollTo(value = viewModel.categoryScrollPosition) }
+                rememberCoroutineScope().launch { scrollState.animateScrollTo(value = listViewModel.categoryScrollPosition) }
                 FoodCategory.values().forEach {
                     FoodCategoryChip(
                         category = it,
-                        isSelected = viewModel.selectedCategory.value == it,
+                        isSelected = listViewModel.selectedCategory.value == it,
                         onSelectCategoryChanged = { categoryName ->
-                            viewModel.onSelectedCategoryChanged(categoryName)
-                            viewModel.categoryScrollPosition = scrollState.value
+                            listViewModel.onSelectedCategoryChanged(categoryName)
+                            listViewModel.categoryScrollPosition = scrollState.value
                         },
                         onClick = {
-                            if (viewModel.selectedCategory.value?.value == "Milk") {
+                            if (listViewModel.selectedCategory.value?.value == "Milk") {
                                 snackbarController.showSnackbar(scaffoldState, "Invalid category", "Hide")
                             } else {
-                                viewModel.onQueryChanged(it.value)
-                                viewModel.onEvent(NewSearchEvent)
+                                listViewModel.onQueryChanged(it.value)
+                                listViewModel.onEvent(NewSearchEvent)
                             }
                         }
                     )

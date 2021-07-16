@@ -6,7 +6,7 @@ import androidx.compose.material.ScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.kvlg.recipe.ui.RecipeViewModel
+import com.kvlg.recipe.ui.RecipeListViewModel
 
 /**
  * @author Konstantin Koval
@@ -15,25 +15,25 @@ import com.kvlg.recipe.ui.RecipeViewModel
 
 @Composable
 fun RecipeList(
-    viewModel: RecipeViewModel,
+    listViewModel: RecipeListViewModel,
     scaffoldState: ScaffoldState,
     modifier: Modifier,
-    onRecipeClick: (Long) -> Unit,
+    onRecipeClick: (Int) -> Unit,
 ) {
-    if (viewModel.loading.value && viewModel.recipes.value.isEmpty()) {
+    if (listViewModel.loading.value && listViewModel.recipes.value.isEmpty()) {
         LoadingRecipeListShimmer(imageHeight = 260.dp)
     }
 
     LazyColumn {
         itemsIndexed(
-            items = viewModel.recipes.value
+            items = listViewModel.recipes.value
         ) { index, item ->
-            viewModel.onChangeScrollPosition(index)
+            listViewModel.onChangeScrollPosition(index)
             RecipeCard(recipe = item, onClick = onRecipeClick)
         }
 
     }
-    CircularIndeterminateProgressBar(isDisplayed = viewModel.loading.value)
+    CircularIndeterminateProgressBar(isDisplayed = listViewModel.loading.value)
     DefaultSnackbar(snackbarHostState = scaffoldState.snackbarHostState, modifier = modifier) {
         scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
     }

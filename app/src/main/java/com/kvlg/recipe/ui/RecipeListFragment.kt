@@ -21,7 +21,7 @@ import com.kvlg.recipe.ui.util.SnackbarController
  */
 
 @Composable
-fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit) {
+fun RecipeListFragment(listViewModel: RecipeListViewModel, onRecipeClick: (Int) -> Unit) {
     val scaffoldState = rememberScaffoldState()
     val snackbarController = SnackbarController(rememberCoroutineScope())
 
@@ -30,7 +30,7 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
         snackbarHost = { scaffoldState.snackbarHostState },
         topBar = {
             SearchAppBar(
-                viewModel = viewModel,
+                listViewModel = listViewModel,
                 scaffoldState = scaffoldState,
                 snackbarController = snackbarController,
                 onToggleTheme = { toggleLightTheme() })
@@ -44,7 +44,7 @@ fun RecipeListFragment(viewModel: RecipeViewModel, onRecipeClick: (Long) -> Unit
                 .background(color = MaterialTheme.colors.background)
         ) {
             RecipeList(
-                viewModel = viewModel,
+                listViewModel = listViewModel,
                 scaffoldState = scaffoldState,
                 modifier = Modifier.align(Alignment.BottomCenter),
                 onRecipeClick = onRecipeClick

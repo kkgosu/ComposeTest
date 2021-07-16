@@ -28,7 +28,7 @@ import com.kvlg.recipe.model.data.RecipeResponseModel
 @Composable
 fun RecipeCard(
     recipe: RecipeResponseModel,
-    onClick: (Long) -> Unit
+    onClick: (Int) -> Unit
 ) {
     Card(
         shape = MaterialTheme.shapes.medium,
@@ -38,7 +38,7 @@ fun RecipeCard(
             )
             .fillMaxWidth()
             .clickable(onClick = {
-                onClick(recipe.pk?.toLong() ?: 0L)
+                onClick(recipe.pk ?: 0)
             }),
         elevation = 8.dp
     ) {
