@@ -38,7 +38,7 @@ class RecipeViewModel @Inject constructor(
     }
 
     fun onEvent(event: RecipeEvent) {
-        viewModelScope.launch {
+        viewModelScope.launch(handler) {
             when (event) {
                 is GetRecipe -> getRecipe(event.id)
             }
