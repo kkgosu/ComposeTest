@@ -46,14 +46,12 @@ class RecipeViewModel @Inject constructor(
     }
 
     private suspend fun getRecipe(id: Int) {
-        if (recipe.value == null) {
-            loading.value = true
-            delay(2000)
-            val recipe = repository.get(token = token, id = id)
-            this.recipe.value = recipe
-            savedStateHandle.set(STATE_KEY_RECIPE, recipe.pk)
-            loading.value = false
-        }
+        loading.value = true
+        delay(2000)
+        val recipe = repository.get(token = token, id = id)
+        this.recipe.value = recipe
+        savedStateHandle.set(STATE_KEY_RECIPE, recipe.pk)
+        loading.value = false
     }
 
 

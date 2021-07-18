@@ -23,7 +23,7 @@ fun RecipeFragment(id: Int, viewModel: RecipeViewModel) {
 
     Scaffold(scaffoldState = scaffoldState, snackbarHost = { scaffoldState.snackbarHostState }) {
         Box(modifier = Modifier.fillMaxSize()) {
-            if (viewModel.loading.value && viewModel.recipe.value == null) {
+            if (viewModel.loading.value) {
                 LoadingRecipeShimmer(imageHeight = 260.dp)
             } else {
                 viewModel.recipe.value?.let {
