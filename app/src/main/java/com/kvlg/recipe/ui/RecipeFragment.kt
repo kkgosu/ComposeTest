@@ -8,8 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.kvlg.recipe.ui.components.CircularIndeterminateProgressBar
+import androidx.compose.ui.unit.dp
 import com.kvlg.recipe.ui.components.DefaultSnackbar
+import com.kvlg.recipe.ui.components.LoadingRecipeShimmer
 import com.kvlg.recipe.ui.components.RecipeView
 import com.kvlg.recipe.ui.event.RecipeEvent.GetRecipe
 import com.kvlg.recipe.ui.util.SnackbarController
@@ -22,18 +23,21 @@ fun RecipeFragment(id: Int, viewModel: RecipeViewModel) {
 
     Scaffold(scaffoldState = scaffoldState, snackbarHost = { scaffoldState.snackbarHostState }) {
         Box(modifier = Modifier.fillMaxSize()) {
-            viewModel.recipe.value?.let {
-                if (id == 1) {
-                    snackbarController.showSnackbar(
-                        scaffoldState = scaffoldState,
-                        message = "An error occurred with this recipe",
-                        actionLabel = "Ok"
-                    )
-                } else {
-                    RecipeView(recipe = it)
+            if (viewModel.loading.value && viewModel.recipe.value == null) {
+                LoadingRecipeShimmer(imageHeight = 260.dp)
+            } else {
+                viewModel.recipe.value?.let {
+                    if (id == 1) {
+                        snackbarController.showSnackbar(
+                            scaffoldState = scaffoldState,
+                            message = "An error occurred with this recipe",
+                            actionLabel = "Ok"
+                        )
+                    } else {
+                        RecipeView(recipe = it)
+                    }
                 }
             }
-            CircularIndeterminateProgressBar(isDisplayed = viewModel.loading.value)
             DefaultSnackbar(snackbarHostState = scaffoldState.snackbarHostState, modifier = Modifier.align(Alignment.BottomCenter)) {
                 scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
             }
