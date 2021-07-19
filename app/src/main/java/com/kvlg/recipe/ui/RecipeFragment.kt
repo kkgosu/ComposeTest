@@ -6,10 +6,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.kvlg.recipe.ui.components.DefaultSnackbar
 import com.kvlg.recipe.ui.components.LoadingRecipeShimmer
 import com.kvlg.recipe.ui.components.RecipeView
 import com.kvlg.recipe.ui.event.RecipeEvent.GetRecipe
@@ -38,10 +36,6 @@ fun RecipeFragment(id: Int, viewModel: RecipeViewModel) {
                     }
                 }
             }
-            DefaultSnackbar(snackbarHostState = scaffoldState.snackbarHostState, modifier = Modifier.align(Alignment.BottomCenter)) {
-                scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
-            }
         }
     }
-
 }

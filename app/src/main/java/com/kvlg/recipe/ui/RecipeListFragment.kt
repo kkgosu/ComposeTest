@@ -8,7 +8,6 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.kvlg.recipe.RecipeApplication.Companion.toggleLightTheme
 import com.kvlg.recipe.ui.components.RecipeList
@@ -34,9 +33,7 @@ fun RecipeListFragment(listViewModel: RecipeListViewModel, onRecipeClick: (Int) 
                 scaffoldState = scaffoldState,
                 snackbarController = snackbarController,
                 onToggleTheme = { toggleLightTheme() })
-        },
-        bottomBar = {},
-        drawerContent = {})
+        })
     {
         Box(
             modifier = Modifier
@@ -45,8 +42,6 @@ fun RecipeListFragment(listViewModel: RecipeListViewModel, onRecipeClick: (Int) 
         ) {
             RecipeList(
                 listViewModel = listViewModel,
-                scaffoldState = scaffoldState,
-                modifier = Modifier.align(Alignment.BottomCenter),
                 onRecipeClick = onRecipeClick
             )
         }

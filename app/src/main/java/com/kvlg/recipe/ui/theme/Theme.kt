@@ -1,8 +1,13 @@
 package com.kvlg.recipe.ui.theme
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ScaffoldState
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
+import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.Stable
@@ -11,7 +16,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.kvlg.recipe.ui.components.DefaultSnackbar
 
 /**
  * @author Konstantin Koval
@@ -49,6 +57,7 @@ private val DarkThemeColors = darkColors(
 @Composable
 fun AppTheme(
     darkTheme: Boolean,
+    scaffoldState: ScaffoldState = rememberScaffoldState(),
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
@@ -56,7 +65,16 @@ fun AppTheme(
         typography = Typography,
         shapes = Shapes
     ) {
-        content()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = if (!darkTheme) Grey1 else Black2)
+        ) {
+            content()
+            DefaultSnackbar(snackbarHostState = scaffoldState.snackbarHostState, modifier = Modifier.align(Alignment.BottomCenter)) {
+                scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
+            }
+        }
     }
 }
 
