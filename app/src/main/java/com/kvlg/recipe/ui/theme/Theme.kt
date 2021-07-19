@@ -2,6 +2,7 @@ package com.kvlg.recipe.ui.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.ScaffoldState
@@ -19,6 +20,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.kvlg.recipe.ui.components.ConnectivityMonitor
 import com.kvlg.recipe.ui.components.DefaultSnackbar
 
 /**
@@ -58,6 +60,7 @@ private val DarkThemeColors = darkColors(
 fun AppTheme(
     darkTheme: Boolean,
     scaffoldState: ScaffoldState = rememberScaffoldState(),
+    isNetworkAvailable: Boolean,
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
@@ -70,7 +73,10 @@ fun AppTheme(
                 .fillMaxSize()
                 .background(color = if (!darkTheme) Grey1 else Black2)
         ) {
-            content()
+            Column {
+                ConnectivityMonitor(isNetworkAvailable = isNetworkAvailable)
+                content()
+            }
             DefaultSnackbar(snackbarHostState = scaffoldState.snackbarHostState, modifier = Modifier.align(Alignment.BottomCenter)) {
                 scaffoldState.snackbarHostState.currentSnackbarData?.dismiss()
             }

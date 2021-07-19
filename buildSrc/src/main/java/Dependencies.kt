@@ -49,6 +49,7 @@ object Libs {
             const val foundation = "androidx.compose.foundation:foundation:${version}"
             const val layout = "androidx.compose.foundation:foundation-layout:${version}"
             const val ui = "androidx.compose.ui:ui:${version}"
+            const val livedata = "androidx.compose.runtime:runtime-livedata:$version"
             const val uiUtil = "androidx.compose.ui:ui-util:${version}"
             const val runtime = "androidx.compose.runtime:runtime:${version}"
             const val material = "androidx.compose.material:material:${version}"
