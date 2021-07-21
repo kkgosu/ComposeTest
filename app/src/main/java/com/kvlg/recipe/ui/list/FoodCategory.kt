@@ -1,4 +1,4 @@
-package com.kvlg.recipe.ui
+package com.kvlg.recipe.ui.list
 
 /**
  * @author Konstantin Koval

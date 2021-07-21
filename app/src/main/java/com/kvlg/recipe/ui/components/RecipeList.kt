@@ -4,7 +4,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.kvlg.recipe.ui.RecipeListViewModel
+import com.kvlg.recipe.ui.list.RecipeListViewModel
 
 /**
  * @author Konstantin Koval

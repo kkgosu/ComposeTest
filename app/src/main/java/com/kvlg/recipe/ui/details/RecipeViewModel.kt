@@ -1,4 +1,4 @@
-package com.kvlg.recipe.ui
+package com.kvlg.recipe.ui.details
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateOf

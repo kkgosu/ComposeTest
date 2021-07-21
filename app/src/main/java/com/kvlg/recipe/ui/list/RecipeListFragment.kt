@@ -1,4 +1,4 @@
-package com.kvlg.recipe.ui
+package com.kvlg.recipe.ui.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

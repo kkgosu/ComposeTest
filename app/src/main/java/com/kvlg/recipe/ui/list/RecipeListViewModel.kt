@@ -1,4 +1,4 @@
-package com.kvlg.recipe.ui
+package com.kvlg.recipe.ui.list
 
 import android.util.Log
 import androidx.compose.runtime.MutableState
@@ -8,10 +8,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kvlg.recipe.data.RecipeRepository
 import com.kvlg.recipe.model.data.RecipeResponseModel
+import com.kvlg.recipe.ui.FoodCategory
 import com.kvlg.recipe.ui.event.RecipeListEvent
 import com.kvlg.recipe.ui.event.RecipeListEvent.NewSearchEvent
 import com.kvlg.recipe.ui.event.RecipeListEvent.NextPageEvent
 import com.kvlg.recipe.ui.event.RecipeListEvent.RestoreStateEvent
+import com.kvlg.recipe.ui.getFoodCategory
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.delay

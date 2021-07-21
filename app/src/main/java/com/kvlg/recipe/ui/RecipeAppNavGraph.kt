@@ -13,6 +13,10 @@ import com.kvlg.recipe.ui.Destinations.HOME
 import com.kvlg.recipe.ui.Destinations.HOME_ROUTE
 import com.kvlg.recipe.ui.Destinations.RECIPE_DETAILS
 import com.kvlg.recipe.ui.Destinations.RECIPE_ID
+import com.kvlg.recipe.ui.details.RecipeFragment
+import com.kvlg.recipe.ui.details.RecipeViewModel
+import com.kvlg.recipe.ui.list.RecipeListFragment
+import com.kvlg.recipe.ui.list.RecipeListViewModel
 
 /**
  * @author Konstantin Koval

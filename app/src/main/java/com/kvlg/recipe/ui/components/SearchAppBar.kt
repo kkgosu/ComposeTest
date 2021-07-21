@@ -28,7 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.kvlg.recipe.ui.FoodCategory
-import com.kvlg.recipe.ui.RecipeListViewModel
+import com.kvlg.recipe.ui.list.RecipeListViewModel
 import com.kvlg.recipe.ui.event.RecipeListEvent.NewSearchEvent
 import com.kvlg.recipe.ui.util.SnackbarController
 import kotlinx.coroutines.launch
